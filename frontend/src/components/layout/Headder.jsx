@@ -31,7 +31,7 @@ export default function Header({ toggleSidebar }) {
         <Dialog
           className="dialog-form"
           maskClassName="bg-black/80"
-          header="Form"
+          header=""
           visible={diplayCreateUSer}
           draggable={false}
           style={{ width: "50vw" }}

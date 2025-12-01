@@ -6,6 +6,7 @@ export default function ManageUsers() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+
   // Fetch users from API
   const fetchUsers = async () => {
     try {
@@ -28,14 +29,10 @@ export default function ManageUsers() {
       <h1 className="text-2xl font-bold mb-5">Manage Users</h1>
 
       {/* Loading */}
-      {loading && (
-        <p className="text-gray-600">Loading users...</p>
-      )}
+      {loading && <p className="text-gray-600">Loading users...</p>}
 
       {/* Error */}
-      {error && (
-        <p className="text-red-500 mb-4">{error}</p>
-      )}
+      {error && <p className="text-red-500 mb-4">{error}</p>}
 
       {/* Users Table */}
       {!loading && !error && (

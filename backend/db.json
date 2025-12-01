@@ -1,12 +1,12 @@
 {
   "users": [
     {
-      "id": 1,
-      "firstName": "Naresh",
-      "lastName": "Kumar",
-      "email": "naresh.kumar@example.com",
-      "role": "Admin",
-      "contactNumber": "+91 9876543210"
+      "firstName": "Nareshss",
+      "lastName": "Kumarddd",
+      "email": "naresh.kumar@example.comdd",
+      "role": "User",
+      "contactNumber": "1234567897",
+      "id": 1
     },
     {
       "id": 2,
