@@ -1,9 +1,9 @@
 import { Menu, UserStar } from "lucide-react";
 import { useState } from "react";
 import { Dialog } from "primereact/dialog";
-import { Message } from "primereact/message";
-import { InputText } from "primereact/inputtext";
-import "../../styles/header.css"
+import "../../styles/header.css";
+import Form from "../../utils/Form";
+
 export default function Header({ toggleSidebar }) {
   const [diplayCreateUSer, setDisplayCredateUser] = useState(false);
   return (
@@ -31,7 +31,7 @@ export default function Header({ toggleSidebar }) {
         <Dialog
           className="dialog-form"
           maskClassName="bg-black/80"
-          header="Header"
+          header="Form"
           visible={diplayCreateUSer}
           draggable={false}
           style={{ width: "50vw" }}
@@ -40,30 +40,7 @@ export default function Header({ toggleSidebar }) {
             setDisplayCredateUser(false);
           }}
         >
-          <div className="card">
-            <div className="flex flex-wrap align-items-center mb-3 gap-2">
-              <label htmlFor="username" className="p-hidden-accessible">
-                Username
-              </label>
-              <InputText
-                id="username"
-                placeholder="Username"
-                className="p-invalid mr-2"
-              />
-              <Message severity="error" text="Username is required" />
-            </div>
-            <div className="flex flex-wrap align-items-center gap-2">
-              <label htmlFor="email" className="p-hidden-accessible">
-                Email
-              </label>
-              <InputText
-                id="email"
-                placeholder="Email"
-                className="p-invalid mr-2"
-              />
-              <Message severity="error" />
-            </div>
-          </div>
+         <Form onSuccess={() => setDisplayCredateUser(false)}/>
         </Dialog>
       </div>
     </header>
