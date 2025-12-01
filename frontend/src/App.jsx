@@ -7,7 +7,7 @@ import ManageUsers from "./pages/ManageUsers";
 import ViewUser from "./pages/ViewUser";
 
 // // Role Pages
-// import ManageRoles from "../pages/roles/ManageRoles";
+import ManageRoles from "./pages/ManageRoles";
 // import ViewRole from "../pages/roles/ViewRole";
 
 export default function AppRoutes() {
@@ -18,7 +18,7 @@ export default function AppRoutes() {
         <Route path="users" element={<ManageUsers />} />
         <Route path="users/:id" element={<ViewUser />} />
         // {/* Role Routes */}
-        // {/* <Route path="roles" element={<ManageRoles />} /> */}
+        <Route path="roles" element={<ManageRoles />} />
         // {/* <Route path="roles/:id" element={<ViewRole />} /> */}
       </Route>
     </Routes>

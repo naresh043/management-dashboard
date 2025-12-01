@@ -6,7 +6,6 @@ export default function ManageUsers() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-
   // Fetch users from API
   const fetchUsers = async () => {
     try {
@@ -36,25 +35,32 @@ export default function ManageUsers() {
 
       {/* Users Table */}
       {!loading && !error && (
-        <table className="w-full bg-white shadow rounded">
+        <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
           <thead>
-            <tr className="bg-gray-100">
-              <th className="p-3">First Name</th>
-              <th className="p-3">Last Name</th>
-              <th className="p-3">Email</th>
-              <th className="p-3">Role</th>
-              <th className="p-3">Actions</th>
+            <tr className="bg-gray-100 border-b text-left">
+              <th className="p-3 font-semibold text-gray-700">First Name</th>
+              <th className="p-3 font-semibold text-gray-700">Last Name</th>
+              <th className="p-3 font-semibold text-gray-700">Email</th>
+              <th className="p-3 font-semibold text-gray-700">Role</th>
+              <th className="p-3 font-semibold text-gray-700 text-center w-32">
+                Actions
+              </th>
             </tr>
           </thead>
+
           <tbody>
             {users.map((u) => (
-              <tr key={u.id} className="border-b">
+              <tr key={u.id} className="border-b hover:bg-gray-50 transition">
                 <td className="p-3">{u.firstName}</td>
                 <td className="p-3">{u.lastName}</td>
                 <td className="p-3">{u.email}</td>
                 <td className="p-3">{u.role}</td>
-                <td className="p-3">
-                  <Link className="text-blue-500" to={`/users/${u.id}`}>
+
+                <td className="p-3 text-center">
+                  <Link
+                    className="text-blue-600 hover:underline font-medium"
+                    to={`/users/${u.id}`}
+                  >
                     View
                   </Link>
                 </td>
@@ -63,7 +69,10 @@ export default function ManageUsers() {
 
             {users.length === 0 && (
               <tr>
-                <td colSpan="5" className="text-center p-4 text-gray-500">
+                <td
+                  colSpan="5"
+                  className="text-center p-5 text-gray-500 italic"
+                >
                   No users found.
                 </td>
               </tr>
