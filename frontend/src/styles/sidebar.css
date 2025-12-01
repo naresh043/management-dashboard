@@ -1,0 +1,17 @@
+/* .p-dialog-mask{
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+.dialog-form{
+   background: white !important; 
+   padding: 20px;
+  border-radius: 10px;
+} */
+.p-sidebar-mask.p-component-overlay {
+  background: rgba(0, 0, 0, 0.4) !important;  
+}
+
+.sidebar-container{
+     background: white !important; 
+   padding: 20px;
+  border-radius: 10px; 
+}

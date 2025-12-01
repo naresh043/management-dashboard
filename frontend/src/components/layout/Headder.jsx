@@ -9,12 +9,12 @@ export default function Header({ toggleSidebar }) {
   return (
     <header className="w-full h-16 bg-white border-b shadow-sm flex items-center justify-between px-4 lg:px-6">
       {/* Mobile: Hamburger */}
-      <button
+      {/* <button
         className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition"
         onClick={toggleSidebar}
       >
         <Menu size={26} />
-      </button>
+      </button> */}
 
       {/* Title */}
       <h1 className="text-xl font-semibold">Admin Dashboard</h1>

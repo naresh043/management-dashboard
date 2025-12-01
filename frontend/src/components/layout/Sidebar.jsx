@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Sidebar as PrimeSidebar } from "primereact/sidebar";
 import { Menu } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import "../../styles/sidebar.css"
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ export default function Sidebar() {
     <>
       {/* ⭐ Hamburger Button (Mobile Only) */}
       <button
-        className="lg:hidden p-3 border rounded-md shadow-sm bg-white ml-3 mt-3"
+        className="lg:hidden p-3 border rounded-md shadow-sm bg-white ml-3 mt-3 h-12"
         onClick={toggle}
       >
         <Menu size={28} />
@@ -55,7 +56,7 @@ export default function Sidebar() {
       <PrimeSidebar
         visible={open}
         onHide={toggle}
-        className="p-0 w-64"
+        className="sidebar-container p-2 w-64"
         dismissable
       >
         <div className="p-5 text-2xl font-bold border-b bg-gray-50">
