@@ -1,4 +1,59 @@
 {
-  "users": [],
-  "roles": []
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Naresh",
+      "lastName": "Kumar",
+      "email": "naresh.kumar@example.com",
+      "role": "Admin",
+      "contactNumber": "+91 9876543210"
+    },
+    {
+      "id": 2,
+      "firstName": "Priya",
+      "lastName": "Sharma",
+      "email": "priya.sharma@example.com",
+      "role": "Manager",
+      "contactNumber": "+91 9090909090"
+    },
+    {
+      "id": 3,
+      "firstName": "Ravi",
+      "lastName": "Verma",
+      "email": "ravi.verma@example.com",
+      "role": "Developer",
+      "contactNumber": "+91 8888888888"
+    },
+    {
+      "id": 4,
+      "firstName": "Anita",
+      "lastName": "Patel",
+      "email": "anita.patel@example.com",
+      "role": "Support",
+      "contactNumber": "+91 7777777777"
+    }
+  ],
+
+  "roles": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "description": "Complete access to manage users and roles"
+    },
+    {
+      "id": 2,
+      "name": "Manager",
+      "description": "Can supervise and manage assigned teams"
+    },
+    {
+      "id": 3,
+      "name": "Developer",
+      "description": "Responsible for development tasks and bug fixes"
+    },
+    {
+      "id": 4,
+      "name": "Support",
+      "description": "Handles customer support queries"
+    }
+  ]
 }

@@ -1,14 +1,29 @@
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import Sidebar from "./components/layout/Sidebar";
 
-import "./App.css";
-import Sidebar from "./components/Sidebar";
+// User Pages
+import ManageUsers from "./pages/ManageUsers";
+// import ViewUser from "../pages/users/ViewUser";
 
-function App() {
+// // Role Pages
+// import ManageRoles from "../pages/roles/ManageRoles";
+// import ViewRole from "../pages/roles/ViewRole";
 
+export default function AppRoutes() {
   return (
-    <>
-      <Sidebar />
-    </>
+   <Routes>
+    <Route path="/" element={<Layout />}>
+        // {/* User Routes */}
+        <Route path="users" element={<ManageUsers />} />
+        // {/* // <Route path="users/:id" element={<ViewUser />} /> */}
+        // {/* Role Routes */}
+        // {/* <Route path="roles" element={<ManageRoles />} /> */}
+        // {/* <Route path="roles/:id" element={<ViewRole />} /> */}
+      </Route>
+    </Routes>
   );
 }
 
-export default App;
+
+
