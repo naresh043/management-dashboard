@@ -1,11 +1,11 @@
 {
   "users": [
     {
-      "firstName": "Nareshss",
-      "lastName": "Kumarddd",
-      "email": "naresh.kumar@example.comdd",
-      "role": "User",
-      "contactNumber": "1234567897",
+      "firstName": "Naresh",
+      "lastName": "Kumar",
+      "email": "naresh.kumar@example.com",
+      "role": "Admin",
+      "contactNumber": "9876543278",
       "id": 1
     },
     {
@@ -14,7 +14,7 @@
       "lastName": "Sharma",
       "email": "priya.sharma@example.com",
       "role": "Manager",
-      "contactNumber": "+91 9090909090"
+      "contactNumber": "9090909090"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "lastName": "Verma",
       "email": "ravi.verma@example.com",
       "role": "Developer",
-      "contactNumber": "+91 8888888888"
+      "contactNumber": "8888888888"
     },
     {
       "id": 4,
@@ -30,23 +30,55 @@
       "lastName": "Patel",
       "email": "anita.patel@example.com",
       "role": "Support",
-      "contactNumber": "+91 7777777777"
+      "contactNumber": "7777777777"
     },
     {
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "role": "",
-      "contact": "",
-      "id": 5
-    },
-    {
-      "firstName": "ffff",
-      "lastName": "ff",
-      "email": "naresh732003@gmail.com",
+      "id": 5,
+      "firstName": "Amit",
+      "lastName": "Singh",
+      "email": "amit.singh@example.com",
       "role": "Admin",
-      "contact": "9703328790",
-      "id": 6
+      "contactNumber": "9123456789"
+    },
+    {
+      "id": 6,
+      "firstName": "Mahesh",
+      "lastName": "Gowda",
+      "email": "mahesh.gowda@example.com",
+      "role": "User",
+      "contactNumber": "9703328790"
+    },
+    {
+      "id": 7,
+      "firstName": "Ajay",
+      "lastName": "V",
+      "email": "ajay.v@example.com",
+      "role": "Admin",
+      "contactNumber": "9703328791"
+    },
+    {
+      "id": 8,
+      "firstName": "Sanjay",
+      "lastName": "Reddy",
+      "email": "sanjay.reddy@example.com",
+      "role": "User",
+      "contactNumber": "9703328792"
+    },
+    {
+      "id": 9,
+      "firstName": "Kiran",
+      "lastName": "Shetty",
+      "email": "kiran.shetty@example.com",
+      "role": "Manager",
+      "contactNumber": "9703328793"
+    },
+    {
+      "id": 10,
+      "firstName": "Deepa",
+      "lastName": "Nair",
+      "email": "deepa.nair@example.com",
+      "role": "Support",
+      "contactNumber": "9703328794"
     }
   ],
   "roles": [
@@ -69,6 +101,11 @@
       "id": 4,
       "name": "Support",
       "description": "Handles customer support queries"
+    },
+    {
+      "id": 5,
+      "name": "User",
+      "description": "Standard user with limited access to basic features"
     }
   ]
 }

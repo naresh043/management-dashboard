@@ -10,7 +10,7 @@ function Form({ onSuccess }) {
     lastName: "",
     email: "",
     role: "",
-    contact: "",
+    contactNumber: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -18,7 +18,7 @@ function Form({ onSuccess }) {
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
 
-    // live remove error when typing
+    // clear error while typing
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
@@ -40,16 +40,16 @@ function Form({ onSuccess }) {
     if (!formData.role)
       newErrors.role = "Role is required";
 
-    if (!formData.contact.trim())
-      newErrors.contact = "Contact number is required";
-    else if (!/^\d{10}$/.test(formData.contact))
-      newErrors.contact = "Enter a valid 10-digit number";
+    if (!formData.contactNumber.trim())
+      newErrors.contactNumber = "Contact number is required";
+    else if (!/^\d{10}$/.test(formData.contactNumber))
+      newErrors.contactNumber = "Enter a valid 10-digit number";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // SUBMIT
+  // SUBMIT API
   const handleSubmit = async () => {
     if (!validate()) return;
 
@@ -62,16 +62,16 @@ function Form({ onSuccess }) {
 
       if (!res.ok) throw new Error("Failed to create user");
 
+      // Reset Form
       setFormData({
         firstName: "",
         lastName: "",
         email: "",
         role: "",
-        contact: "",
+        contactNumber: "",
       });
 
-      if (onSuccess) onSuccess();
-
+      onSuccess && onSuccess();
       alert("User created successfully!");
     } catch (err) {
       alert("Failed to create user");
@@ -137,7 +137,6 @@ function Form({ onSuccess }) {
           className={`w-full border rounded-md shadow-sm ${
             errors.role ? "border-red-500" : "border-gray-300"
           }`}
-          panelClassName="p-2"
         />
         {errors.role && <Message severity="error" text={errors.role} />}
       </div>
@@ -146,13 +145,15 @@ function Form({ onSuccess }) {
       <div className="flex flex-col gap-1">
         <label className="font-medium">Contact Number</label>
         <InputText
-          value={formData.contact}
-          onChange={(e) => handleChange("contact", e.target.value)}
+          value={formData.contactNumber}
+          onChange={(e) =>
+            handleChange("contactNumber", e.target.value)
+          }
           placeholder="Enter contact number"
-          className={`w-full ${errors.contact ? "p-invalid" : ""}`}
+          className={`w-full ${errors.contactNumber ? "p-invalid" : ""}`}
         />
-        {errors.contact && (
-          <Message severity="error" text={errors.contact} />
+        {errors.contactNumber && (
+          <Message severity="error" text={errors.contactNumber} />
         )}
       </div>
 
