@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { Message } from "primereact/message";
 import API_BASE_URL from "../config";
 
-function Form({ onSuccess }) {
+function CreateUserForm({ onSuccess }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -170,4 +170,4 @@ function Form({ onSuccess }) {
   );
 }
 
-export default Form;
+export default CreateUserForm;
