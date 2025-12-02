@@ -30,16 +30,13 @@ function CreateUserForm({ onSuccess }) {
     if (!formData.firstName.trim())
       newErrors.firstName = "First name is required";
 
-    if (!formData.lastName.trim())
-      newErrors.lastName = "Last name is required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
 
-    if (!formData.email.trim())
-      newErrors.email = "Email is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(formData.email))
       newErrors.email = "Enter a valid email";
 
-    if (!formData.role)
-      newErrors.role = "Role is required";
+    if (!formData.role) newErrors.role = "Role is required";
 
     if (!formData.contactNumber.trim())
       newErrors.contactNumber = "Contact number is required";
@@ -82,7 +79,6 @@ function CreateUserForm({ onSuccess }) {
 
   return (
     <div className="card space-y-4">
-
       {/* First Name */}
       <div className="flex flex-col gap-1">
         <label className="font-medium">First Name</label>
@@ -106,9 +102,7 @@ function CreateUserForm({ onSuccess }) {
           placeholder="Enter last name"
           className={`w-full ${errors.lastName ? "p-invalid" : ""}`}
         />
-        {errors.lastName && (
-          <Message severity="error" text={errors.lastName} />
-        )}
+        {errors.lastName && <Message severity="error" text={errors.lastName} />}
       </div>
 
       {/* Email */}
@@ -147,9 +141,7 @@ function CreateUserForm({ onSuccess }) {
         <label className="font-medium">Contact Number</label>
         <InputText
           value={formData.contactNumber}
-          onChange={(e) =>
-            handleChange("contactNumber", e.target.value)
-          }
+          onChange={(e) => handleChange("contactNumber", e.target.value)}
           placeholder="Enter contact number"
           className={`w-full ${errors.contactNumber ? "p-invalid" : ""}`}
         />
@@ -159,11 +151,11 @@ function CreateUserForm({ onSuccess }) {
       </div>
 
       {/* Submit */}
-      <div className="pt-3">
+      <div className="pt-3 flex justify-center">
         <Button
           label="Create User"
           onClick={handleSubmit}
-          className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-md py-2"
+          className="bg-blue-600 text-white hover:bg-blue-700 rounded-md py-2 px-5"
         />
       </div>
     </div>

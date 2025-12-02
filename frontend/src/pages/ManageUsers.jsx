@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 import { Link } from "react-router-dom";
 import API_BASE_URL from "../config";
 
+import "../styles/manageuser.css"
 export default function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  // Pagination states
-  const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 5;
 
   const fetchUsers = async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/users`);
       const data = await res.json();
       setUsers(data);
-    } catch (err) {
-      setError("Failed to load users");
     } finally {
       setLoading(false);
     }
@@ -27,125 +23,104 @@ export default function ManageUsers() {
     fetchUsers();
   }, []);
 
-  // ---------- Pagination Logic ----------
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  // ---------- ROLE BADGE ----------
+  const roleTemplate = (row) => {
+    const colors = {
+      Admin: "bg-red-100 text-red-700",
+      Manager: "bg-blue-100 text-blue-700",
+      User: "bg-green-100 text-green-700",
+      Developer: "bg-purple-100 text-purple-700",
+      Support: "bg-yellow-100 text-yellow-700",
+    };
 
-  const totalPages = Math.ceil(users.length / usersPerPage);
-
-  const goToPage = (page) => {
-    if (page < 1 || page > totalPages) return;
-    setCurrentPage(page);
+    return (
+      <span
+        className={`px-3 py-1 rounded-full text-sm font-medium ${
+          colors[row.role] || "bg-gray-100 text-gray-700"
+        }`}
+      >
+        {row.role}
+      </span>
+    );
   };
-  // --------------------------------------
+
+  // ---------- ACTION BUTTON ----------
+  const actionTemplate = (row) => (
+    <Link
+      to={`/users/${row.id}`}
+      className="px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition"
+    >
+      View
+    </Link>
+  );
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-5">Manage Users</h1>
+    <div className="p-6">
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-3xl font-bold">Manage Users</h1>
+      </div>
 
-      {loading && <p className="text-gray-600">Loading users...</p>}
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {/* TABLE CONTAINER */}
+      <div className="bg-white p-5 shadow-lg rounded-xl border border-gray-100">
+        <DataTable
+          value={users}
+          paginator
+          rows={5}
+          rowsPerPageOptions={[5, 10, 20]}
+          paginatorTemplate="PrevPageLink PageLinks NextPageLink RowsPerPageDropdown CurrentPageReport"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+          sortMode="multiple"
+          filterDisplay="row"
+          className="rounded-xl overflow-hidden shadow"
+        >
+          <Column
+            field="firstName"
+            header="First Name"
+            sortable
+            filter
+            filterPlaceholder="Search..."
+            headerClassName="text-gray-700 font-semibold bg-gray-50"
+            className="py-3"
+          />
 
-      {!loading && !error && (
-        <>
-          {/* ---------- Users Table ---------- */}
-          <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
-            <thead>
-              <tr className="bg-gray-100 border-b text-left">
-                <th className="p-3 font-semibold text-gray-700">First Name</th>
-                <th className="p-3 font-semibold text-gray-700">Last Name</th>
-                <th className="p-3 font-semibold text-gray-700">Email</th>
-                <th className="p-3 font-semibold text-gray-700">Role</th>
-                <th className="p-3 font-semibold text-gray-700 text-center w-32">
-                  Actions
-                </th>
-              </tr>
-            </thead>
+          <Column
+            field="lastName"
+            header="Last Name"
+            sortable
+            filter
+            filterPlaceholder="Search..."
+            headerClassName="text-gray-700 font-semibold bg-gray-50"
+          />
 
-            <tbody>
-              {currentUsers.map((u) => (
-                <tr key={u.id} className="border-b hover:bg-gray-50 transition">
-                  <td className="p-3">{u.firstName}</td>
-                  <td className="p-3">{u.lastName}</td>
-                  <td className="p-3">{u.email}</td>
-                  <td className="p-3">{u.role}</td>
+          <Column
+            field="email"
+            header="Email"
+            sortable
+            filter
+            filterPlaceholder="Search..."
+            headerClassName="text-gray-700 font-semibold bg-gray-50"
+          />
 
-                  <td className="p-3 text-center">
-                    <Link
-                      className="text-blue-600 hover:underline font-medium"
-                      to={`/users/${u.id}`}
-                    >
-                      View
-                    </Link>
-                  </td>
-                </tr>
-              ))}
+          <Column
+            field="role"
+            header="Role"
+            sortable
+            filter
+            body={roleTemplate}
+            filterPlaceholder="Search..."
+            headerClassName="text-gray-700 font-semibold bg-gray-50"
+          />
 
-              {users.length === 0 && (
-                <tr>
-                  <td
-                    colSpan="5"
-                    className="text-center p-5 text-gray-500 italic"
-                  >
-                    No users found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-
-          {/* ---------- Pagination UI ---------- */}
-          <div className="flex justify-center items-center gap-2 mt-5">
-            <button
-              onClick={() => goToPage(1)}
-              disabled={currentPage === 1}
-              className="px-3 py-1 border rounded disabled:opacity-50"
-            >
-              First
-            </button>
-
-            <button
-              onClick={() => goToPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="px-3 py-1 border rounded disabled:opacity-50"
-            >
-              Prev
-            </button>
-
-            {/* Page Numbers */}
-            {[...Array(totalPages)].map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goToPage(i + 1)}
-                className={`px-3 py-1 border rounded ${
-                  currentPage === i + 1
-                    ? "bg-blue-600 text-white"
-                    : "bg-white"
-                }`}
-              >
-                {i + 1}
-              </button>
-            ))}
-
-            <button
-              onClick={() => goToPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="px-3 py-1 border rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-
-            <button
-              onClick={() => goToPage(totalPages)}
-              disabled={currentPage === totalPages}
-              className="px-3 py-1 border rounded disabled:opacity-50"
-            >
-              Last
-            </button>
-          </div>
-        </>
-      )}
+          <Column
+            header="Actions"
+            body={actionTemplate}
+            headerClassName="text-gray-700 font-semibold bg-gray-50 text-center"
+            bodyClassName="text-center"
+            style={{ width: "140px" }}
+          />
+        </DataTable>
+      </div>
     </div>
   );
 }

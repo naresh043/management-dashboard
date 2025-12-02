@@ -1,0 +1,8 @@
+.p-fluid .p-inputtext {
+  width: 100px;
+}
+.p-column-filter-row .p-column-filter-element { 
+  flex: 1 1 auto !important;
+  width: 1%;
+  margin-left: 20px;
+} 
