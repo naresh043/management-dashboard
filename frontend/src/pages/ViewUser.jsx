@@ -5,6 +5,7 @@ import { Dialog } from "primereact/dialog";
 import { Mail, Phone, UserCircle2, ShieldCheck, Pencil } from "lucide-react";
 import "../styles/viewuser.css"
 import EditUserForm from "../utils/EditUserForm";
+import API_BASE_URL from "../config";
 
 export default function ViewUser() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ export default function ViewUser() {
   // Fetch User by ID
   const fetchUser = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/users/${id}`);
+      const res = await fetch(`${API_BASE_URL}/users/${id}`);
       if (!res.ok) throw new Error("User not found");
 
       const data = await res.json();

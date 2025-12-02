@@ -3,6 +3,7 @@ import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Message } from "primereact/message";
+import API_BASE_URL from "../config";
 
 function Form({ onSuccess }) {
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ function Form({ onSuccess }) {
     if (!validate()) return;
 
     try {
-      const res = await fetch("http://localhost:5000/users", {
+      const res = await fetch(`${API_BASE_URL}/users`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

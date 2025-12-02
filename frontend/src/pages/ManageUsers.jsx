@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "../config";
 
 export default function ManageUsers() {
   const [users, setUsers] = useState([]);
@@ -9,7 +10,7 @@ export default function ManageUsers() {
   // Fetch users from API
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:5000/users");
+      const res = await fetch(`${API_BASE_URL}/users`);
       const data = await res.json();
       setUsers(data);
     } catch (err) {

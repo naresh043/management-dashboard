@@ -3,6 +3,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { Message } from "primereact/message";
 import { Button } from "primereact/button";
+import API_BASE_URL from "../config";
 
 export default function EditUserForm({ user, onSuccess }) {
   const [formData, setFormData] = useState({
@@ -42,7 +43,7 @@ export default function EditUserForm({ user, onSuccess }) {
   const handleUpdate = async () => {
     if (!validate()) return;
 
-    await fetch(`http://localhost:5000/users/${user.id}`, {
+    await fetch(`${API_BASE_URL}/users/${user.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

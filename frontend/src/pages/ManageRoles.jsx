@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_BASE_URL from "../config";
 
 export default function ManageRoles() {
   const [roles, setRoles] = useState([]);
@@ -8,7 +9,7 @@ export default function ManageRoles() {
   // Fetch roles from API
   const fetchRoles = async () => {
     try {
-      const res = await fetch("http://localhost:5000/roles");
+      const res = await fetch(`${API_BASE_URL}/roles`);
 
       const data = await res.json();
       //   debugger
