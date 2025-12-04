@@ -11,7 +11,6 @@ export default function Header({ toggleSidebar }) {
       
       {/* LEFT SIDE */}
       <div className="flex items-center gap-3">
-        <Menu className="cursor-pointer lg:hidden" onClick={toggleSidebar} />
         <h1 className="text-xl font-semibold">Admin Dashboard</h1>
       </div>
 

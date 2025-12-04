@@ -29,16 +29,23 @@ export default function Layout() {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <div className="flex">
+    <div className="flex h-screen overflow-hidden"> 
+      {/* Sidebar */}
       <Sidebar open={sidebarOpen} toggle={toggleSidebar} />
 
-      <div className="flex-1">
+      {/* Main Wrapper */}
+      <div className="flex flex-1 flex-col h-full">
+        
+        {/* Header fixed */}
         <Header toggleSidebar={toggleSidebar} />
 
-        <main className="p-4">
+        {/* Scrollable content */}
+        <main className="flex-1 overflow-y-auto p-4 bg-gray-50">
           <Outlet />
         </main>
+
       </div>
     </div>
   );
 }
+
