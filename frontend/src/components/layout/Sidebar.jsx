@@ -28,7 +28,6 @@ export default function Sidebar({ open, toggle }) {   // <-- use props
           <div className="p-5 text-2xl font-bold border-b bg-gray-50">
             Admin Panel
           </div>
-<h1>hellon </h1>
           <ul className="mt-5 space-y-1 px-2">
             {menuItems.map((item) => (
               <li key={item.path}>
