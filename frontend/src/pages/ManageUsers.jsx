@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Link } from "react-router-dom";
+import { Dialog } from "primereact/dialog";
 import API_BASE_URL from "../config";
 
-import "../styles/manageuser.css"
+import CreateUserForm from "../utils/CreateUserForm"; // ⬅ ADD THIS
+import "../styles/manageuser.css";
+
 export default function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [displayCreateUser, setDisplayCreateUser] = useState(false); // ⬅ ADD THIS
 
   const fetchUsers = async () => {
     try {
@@ -59,7 +64,31 @@ export default function ManageUsers() {
       {/* HEADER */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold">Manage Users</h1>
+
+        {/* ---------- CREATE USER BUTTON ---------- */}
+        <button
+          onClick={() => setDisplayCreateUser(true)}
+          className="px-4 py-1.5 text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition"
+        >
+          Create User
+        </button>
       </div>
+
+      {/* ---------- CREATE USER DIALOG ---------- */}
+      <Dialog
+        className="dialog-form"
+        maskClassName="bg-black/80"
+        visible={displayCreateUser}
+        style={{ width: "50vw" }}
+        onHide={() => setDisplayCreateUser(false)}
+      >
+        <CreateUserForm
+          onSuccess={() => {
+            setDisplayCreateUser(false);
+            fetchUsers(); // refresh table after creating user
+          }}
+        />
+      </Dialog>
 
       {/* TABLE CONTAINER */}
       <div className="bg-white p-5 shadow-lg rounded-xl border border-gray-100">

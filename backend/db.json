@@ -107,5 +107,21 @@
       "name": "User",
       "description": "Standard user with limited access to basic features"
     }
+  ],
+  "usercredentials": [
+    {
+      "id": 1,
+      "firstName": "Naresh",
+      "lastName": "Kumar",
+      "email": "nareshkumar@gmail.com",
+      "password": "123456"
+    },
+        {
+      "id": 2,
+      "firstName": "Naresh",
+      "lastName": "Sanjeev",
+      "email": "naresh@gmail.com",
+      "password": "123456"
+    }
   ]
 }

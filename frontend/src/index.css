@@ -1,2 +1,14 @@
 
+body.light {
+  background: white !important;
+  color: black !important;
+}
+
+body.black {
+  background: black !important;
+  color: white !important;
+}
 @import "tailwindcss";
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
