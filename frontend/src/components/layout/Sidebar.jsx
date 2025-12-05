@@ -97,7 +97,7 @@ export default function Sidebar({ open, toggle }) {
               <User size={22} />
               <div>
                 <p className="font-semibold">{user?.firstName}</p>
-                <p className="text-xs text-gray-500">View & Attendance</p>
+                <p className="text-xs text-gray-500">View & Profile</p>
               </div>
             </div>
 
