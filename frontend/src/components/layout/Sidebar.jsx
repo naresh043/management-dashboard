@@ -1,14 +1,24 @@
 import { useRef } from "react";
 import { Sidebar as PrimeSidebar } from "primereact/sidebar";
-import { Menu as MenuIcon, User } from "lucide-react";
+// import { Users, IdCard, CheckCircle, Calendar } from "lucide-react";
+import {
+  Menu as MenuIcon,
+  User,
+  Users,
+  CheckCircle,
+  Calendar,
+  IdCard,
+} from "lucide-react";
+import {} from "lucide-react";
+
 import { Menu } from "primereact/menu";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/sidebar.css";
 import useAuth from "../../hook/useAuth";
 
 export default function Sidebar({ open, toggle }) {
-  const {user}=useAuth()
-  console.log(user)
+  const { user } = useAuth();
+  console.log(user);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,20 +26,25 @@ export default function Sidebar({ open, toggle }) {
   const profileMenuRef = useRef(null);
 
   const menuItems = [
-    { label: "Manage Users", icon: "pi pi-users", path: "/users" },
-    { label: "Manage Roles", icon: "pi pi-id-card", path: "/roles" },
+    { label: "Manage Users", icon: <Users size={18} />, path: "/users" },
+    { label: "Manage Roles", icon: <IdCard size={18} />, path: "/roles" },
+    {
+      label: "Mark Attendance",
+      icon: <CheckCircle size={18} />,
+      path: "/attendance",
+    },
+    {
+      label: "View Attendance",
+      icon: <Calendar size={18} />,
+      path: "/attendance-list",
+    },
   ];
 
   const profileItems = [
     {
       label: "User Profile",
-      icon: "pi pi-user",
+      icon: <User size={18} />,
       command: () => navigate("/profile"),
-    },
-    {
-      label: "Mark Attendance",
-      icon: "pi pi-check-circle",
-      command: () => navigate("/attendance"),
     },
   ];
 
@@ -46,7 +61,6 @@ export default function Sidebar({ open, toggle }) {
       {/* Desktop Sidebar */}
       <aside className="hidden lg:block w-64">
         <div className="h-screen bg-white shadow-md border-r flex flex-col justify-between">
-
           {/* TOP MENU */}
           <div>
             <div className="p-5 text-2xl font-bold border-b bg-gray-50">
@@ -58,11 +72,15 @@ export default function Sidebar({ open, toggle }) {
                   <button
                     onClick={() => navigate(item.path)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left
-                      hover:bg-gray-100 transition-all
-                      ${location.pathname === item.path ? "bg-gray-200 font-semibold shadow-sm" : ""}
-                    `}
+        hover:bg-gray-100 transition-all
+        ${
+          location.pathname === item.path
+            ? "bg-gray-200 font-semibold shadow-sm"
+            : ""
+        }
+      `}
                   >
-                    <i className={`${item.icon} text-gray-700`}></i>
+                    {item.icon} {/* ← FIX HERE */}
                     <span>{item.label}</span>
                   </button>
                 </li>
@@ -74,7 +92,7 @@ export default function Sidebar({ open, toggle }) {
           <div className="p-4 border-t bg-gray-50">
             <div
               className="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-gray-200 transition"
-              onClick={(e) => profileMenuRef.current.toggle(e)}  // ✅ FIXED
+              onClick={(e) => profileMenuRef.current.toggle(e)} // ✅ FIXED
             >
               <User size={22} />
               <div>
@@ -90,9 +108,13 @@ export default function Sidebar({ open, toggle }) {
       </aside>
 
       {/* Mobile Sidebar */}
-      <PrimeSidebar visible={open} onHide={toggle} className="sidebar-container p-2 w-64" dismissable>
+      <PrimeSidebar
+        visible={open}
+        onHide={toggle}
+        className="sidebar-container p-2 w-64"
+        dismissable
+      >
         <div className="h-full flex flex-col justify-between">
-
           {/* TOP MOBILE MENU */}
           <div>
             <div className="p-5 text-2xl font-bold border-b bg-gray-50">
@@ -107,11 +129,15 @@ export default function Sidebar({ open, toggle }) {
                       toggle();
                     }}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left
-                      hover:bg-gray-100 transition-all
-                      ${location.pathname === item.path ? "bg-gray-200 font-semibold shadow-sm" : ""}
-                    `}
+        hover:bg-gray-100 transition-all
+        ${
+          location.pathname === item.path
+            ? "bg-gray-200 font-semibold shadow-sm"
+            : ""
+        }
+      `}
                   >
-                    <i className={`${item.icon} text-gray-700`}></i>
+                    {item.icon} {/* ← FIX HERE AS WELL */}
                     <span>{item.label}</span>
                   </button>
                 </li>

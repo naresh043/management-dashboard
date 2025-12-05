@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Card } from "primereact/card";
 import { Dropdown } from "primereact/dropdown";
 import { Calendar } from "primereact/calendar";
 import { Button } from "primereact/button";
 import { FloatLabel } from "primereact/floatlabel";
+import { Toast } from "primereact/toast"; // ← ADD TOAST
 import API_BASE_URL from "../config";
 
 export default function ManageAttendance() {
@@ -13,7 +14,9 @@ export default function ManageAttendance() {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Fetch users from JSON server
+  const toast = useRef(null); // ← TOAST REF
+
+  // Fetch users
   useEffect(() => {
     fetch(`${API_BASE_URL}/users`)
       .then((res) => {
@@ -21,7 +24,14 @@ export default function ManageAttendance() {
         return res.json();
       })
       .then((data) => setUsers(data))
-      .catch(() => alert("Could not connect to JSON server. Please start it."));
+      .catch(() => {
+        toast.current.show({
+          severity: "error",
+          summary: "Connection Error",
+          detail: "Could not connect to JSON server. Please start it.",
+          life: 2500,
+        });
+      });
   }, []);
 
   const attendanceStatus = [
@@ -31,14 +41,21 @@ export default function ManageAttendance() {
 
   const handleSubmit = async () => {
     if (!selectedUser || !date || !status) {
-      alert("Please fill all fields");
+      toast.current.show({
+        severity: "warn",
+        summary: "Missing Fields",
+        detail: "Please fill all fields before submitting.",
+        life: 2000,
+      });
       return;
     }
+
+    const localDate = date.toLocaleDateString("en-CA"); // YYYY-MM-DD without timezone shift
 
     const newRecord = {
       userId: selectedUser.id,
       name: `${selectedUser.firstName} ${selectedUser.lastName}`,
-      date: date.toISOString().split("T")[0],
+      date: localDate,
       status,
     };
 
@@ -53,15 +70,24 @@ export default function ManageAttendance() {
 
       if (!res.ok) throw new Error("Error saving attendance");
 
-      alert("Attendance saved successfully!");
+      toast.current.show({
+        severity: "success",
+        summary: "Success",
+        detail: "Attendance saved successfully!",
+        life: 2000,
+      });
 
       // Reset fields
       setSelectedUser(null);
       setDate(null);
       setStatus(null);
     } catch (err) {
-      console.log(err);
-      alert("Failed to save attendance. Check JSON Server.");
+      toast.current.show({
+        severity: "error",
+        summary: "Save Failed",
+        detail: "Failed to save attendance. Check JSON Server.",
+        life: 2500,
+      });
     } finally {
       setLoading(false);
     }
@@ -69,6 +95,9 @@ export default function ManageAttendance() {
 
   return (
     <div className="flex justify-center mt-10 px-4">
+      {/* Toast Global Component */}
+      <Toast ref={toast} position="top-right" />
+
       <Card className="w-full max-w-xl shadow-lg p-6 rounded-xl">
         <h2 className="text-xl font-semibold mb-5">Manage Attendance</h2>
 
@@ -97,7 +126,7 @@ export default function ManageAttendance() {
                 dateFormat="yy-mm-dd"
                 showIcon
                 className="w-full"
-                maxDate={new Date()}  
+                maxDate={new Date()}
               />
               <label htmlFor="attendance_date">Select Date</label>
             </FloatLabel>

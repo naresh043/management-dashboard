@@ -1,5 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Toast } from "primereact/toast";
 import { AuthContext } from "../context/AuthContext";
 import API_BASE_URL from "../config";
 
@@ -10,15 +11,29 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const toast = useRef(null);
+
+  const showError = (msg) => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error",
+      detail: msg,
+      life: 2000,
+    });
+  };
+
+  const showSuccess = (msg) => {
+    toast.current.show({
+      severity: "success",
+      summary: "Success",
+      detail: msg,
+      life: 1500,
+    });
+  };
+
   const handleLogin = async () => {
-    if (!email.trim()) {
-      alert("Email is required");
-      return;
-    }
-    if (!password.trim()) {
-      alert("Password is required");
-      return;
-    }
+    if (!email.trim()) return showError("Email is required");
+    if (!password.trim()) return showError("Password is required");
 
     try {
       const response = await fetch(
@@ -31,20 +46,26 @@ export default function Login() {
       const users = await response.json();
 
       if (users.length === 1) {
-        localStorage.setItem("user", JSON.stringify(users[0]));
-        login(users[0]);
-        navigate("/");
+        showSuccess("Login successful!");
+
+        setTimeout(() => {
+          localStorage.setItem("user", JSON.stringify(users[0]));
+          login(users[0]);
+          navigate("/");
+        }, 1200);
       } else {
-        alert("Email or password is incorrect");
+        showError("Email or password is incorrect");
       }
     } catch (err) {
       console.error(err);
-      alert("Error logging in");
+      showError("Error logging in");
     }
   };
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100">
+      <Toast ref={toast} />
+
       <div className="bg-white p-6 rounded shadow w-96">
         <h2 className="text-xl font-semibold mb-4 text-center">Login</h2>
 

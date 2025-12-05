@@ -138,6 +138,62 @@
       "date": "2025-12-03",
       "status": "Present",
       "id": 2
+    },
+    {
+      "userId": 2,
+      "name": "Priya Sharma",
+      "date": "2025-12-03",
+      "status": "Present",
+      "id": 3
+    },
+    {
+      "userId": 10,
+      "name": "Deepa Nair",
+      "date": "2025-12-01",
+      "status": "Absent",
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "name": "Naresh kk Kumar",
+      "date": "2025-12-01",
+      "status": "Absent",
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "name": "Naresh kk Kumar",
+      "date": "2025-11-30",
+      "status": "Absent",
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "name": "Naresh kk Kumar",
+      "date": "2025-11-02",
+      "status": "Present",
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "name": "Naresh kk Kumar",
+      "date": "2025-11-06",
+      "status": "Absent",
+      "id": 8
+    },
+    {
+      "userId": 2,
+      "name": "Priya Sharma",
+      "date": "2025-12-04",
+      "status": "Present",
+      "id": 9
+    },
+    {
+      "userId": 3,
+      "name": "Ravi Verma",
+      "date": "2025-12-04",
+      "status": "Absent",
+      "id": 10
     }
   ]
 }
