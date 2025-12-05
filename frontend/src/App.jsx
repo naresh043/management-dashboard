@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 import PrivateRoute from "./routes/PrivateRoute";
+import UserProfile from "./pages/UserProfile";
+import ManageAttendance from "./pages/ManageAttendance";
 
 export default function AppRoutes() {
   return (
@@ -29,6 +31,8 @@ export default function AppRoutes() {
 
         {/* Role Routes */}
         <Route path="roles" element={<ManageRoles />} />
+        <Route path="profile" element={<UserProfile/>} />
+        <Route path="attendance" element={<ManageAttendance/>} />
       </Route>
     </Routes>
   );

@@ -32,7 +32,7 @@ export default function Login() {
 
       if (users.length === 1) {
         localStorage.setItem("user", JSON.stringify(users[0]));
-        login();
+        login(users[0]);
         navigate("/");
       } else {
         alert("Email or password is incorrect");

@@ -7,19 +7,26 @@ export default function AuthProvider({ children }) {
     return localStorage.getItem("isAuth") === "true";
   });
 
-  const login = () => {
+  const [user, setUser] = useState(() => {
+    return JSON.parse(localStorage.getItem("user")) || null;
+  });
+
+  const login = (userData) => {
     setIsAuth(true);
+    setUser(userData);
     localStorage.setItem("isAuth", "true");
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const logout = () => {
     setIsAuth(false);
+    setUser(null);
     localStorage.removeItem("isAuth");
-    localStorage.removeItem("user"); // optional
+    localStorage.removeItem("user");
   };
 
   return (
-    <AuthContext.Provider value={{ isAuth, login, logout }}>
+    <AuthContext.Provider value={{ isAuth, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
